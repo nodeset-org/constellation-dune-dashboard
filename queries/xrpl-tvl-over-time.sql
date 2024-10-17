@@ -4,16 +4,16 @@ WITH xRPL_transfers AS (
     DATE_TRUNC('day', t.block_time) AS block_date,
     SUM(
       CASE
-        WHEN t."to" = {{xRPL_CONTRACT_ADDRESS}} THEN t.amount
+        WHEN t."to" = 0x1DB1Afd9552eeB28e2e36597082440598B7F1320 THEN t.amount
         ELSE -t.amount
       END
     ) AS daily_flow
   FROM
     tokens.transfers t
   WHERE
-    t."from" = {{xRPL_CONTRACT_ADDRESS}}
-    OR t."to" = {{xRPL_CONTRACT_ADDRESS}}
-    AND t.contract_address = {{RPL_TOKEN_ADDRESS}}
+    t."from" = 0x1DB1Afd9552eeB28e2e36597082440598B7F1320
+    OR t."to" = 0x1DB1Afd9552eeB28e2e36597082440598B7F1320
+    AND t.contract_address = 0xD33526068D116cE69F19A9ee46F0bd304F21A51f
   GROUP BY DATE_TRUNC('day', t.block_time)
 ),
 
